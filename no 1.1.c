@@ -287,14 +287,17 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
 
     waktu = clock();
     for (i = 0; i < n; i++) {
-        if (i == n - 1) {
-            printf(" dan %d.", arr[i]);
-        } else {
-            printf(" %d,", arr[i]);
-        }
+//        if (i == n - 1) {
+//            printf(" dan %d.", arr[i]);
+//        } else {
+//            printf("-Angka ke-%d : %d", i, arr[i]);
+//        	printf("\n");
+//        }
         if (arr[i] == angkaDicari) {
             counter++;
         }
+printf("-Angka ke-%d : %d", i, arr[i]);
+        	printf("\n");
     }
     waktu = clock() - waktu;
     waktu_dibutuhkan = (double)(waktu) / CLOCKS_PER_SEC;
@@ -401,6 +404,21 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
 
     return waktu_dibutuhkan;
 }
+void seedArray(int arr[], int n) {
+    int i;
+    srand(0);
+    for (i = 0; i < n; i++) {
+        arr[i] = rand();
+    }
+}
+
+void printArray(int arr[], int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        printf("-Angka ke-%d : %d", i, arr[i]);
+        printf("\n");
+    }
+}
 
 void Searching() {
     clock_t waktu;
@@ -442,19 +460,19 @@ void Searching() {
         }
     } while (1);
     // int angka[1000], temp[1000];
-    int arr[n];
-    n = sizeof(arr) / sizeof(arr[0]);
-    srand((unsigned) time(NULL));
+//    int arr[n];
+//    n = sizeof(arr) / sizeof(arr[0]);
+//    srand((unsigned) time(NULL));
 
-    for (i = 0; i < n; i++) {
-        arr[i] = rand();
-    }
 
-	bubbleSort(arr,n);
-    for (i = 0; i < n; i++) {
-    printf("-Angka ke-%d : %d", i, arr[i]);
-    printf("\n");
-    }
+
+//    for (i = 0; i < n; i++) {
+//        arr[i] = rand();
+//    }
+	int arr[n];
+	seedArray(arr,n);
+    printArray(arr,n); 
+
 
     do {
         printf("\t\t\tMasukkan Angka Yang Ingin Dicari: ");
@@ -470,6 +488,8 @@ void Searching() {
         }
     } while (1);
 
+    printf("\nMasukkan Menu : ");
+    bubbleSort(arr,n);
     waktu_dibutuhkan[0] = sequentialSearch(arr, n, angkaDicari);
     waktu_dibutuhkan[1] = binarySearch(arr, 0, n - 1, angkaDicari);
 
@@ -480,16 +500,11 @@ void Searching() {
     } else {
         printf("Maka Pada Pencarian Kali Ini, Binary Search Lebih Cepat Dari Sequential Search\n\n");
     }
-    printf("\t\t\t\t\tTekan '1' untuk kembali ke MENU SORTING\n");
-    printf("\t\t\t\t\tTekan '0' untuk KELUAR ke MENU UTAMA\n");
-    printf("\t\t\t\t\tMasukkan Menu :");
-    scanf("%d", & exit);
 }
 int main() {
     int menu;
     int enterCheck;
     do {
-        // system("cls");
         menuUtama();
         printf("\t\t\t\t\t Masukkan Menu : ");
         if (((scanf(" %d%c", & menu, & enterCheck)) != 2 || enterCheck != '\n')) {
