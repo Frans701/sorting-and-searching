@@ -23,6 +23,8 @@ void seedArray(int arr[], int n) { //untuk melakukan data random
 
 }
 
+//test
+
 void printArray(int arr[], int n) { //mencetak angka random
     int i;
     for (i = 0; i < n; i++) {
