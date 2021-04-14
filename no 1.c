@@ -10,6 +10,9 @@
 
 #include <stdbool.h>
 
+void akhir();
+void menu2(int arr[], int n, float pilihan);
+void cetakAkhir();
 
 void seedArray(int arr[], int n) { //untuk melakukan data random
     int i;
@@ -280,9 +283,9 @@ void menu2(int arr[], int n, float pilihan) { //menu pilihan sorting atau search
 int menu() { //menu pilihan data
     int pilihan;
     int pilihan1;
-    int cek;
+    char enterCheck;
     int n;
-
+    
     printf("\n+-----------------------------------------------------+");
     printf("\n|             PROGRAM SORTING & SEARCHING             |");
     printf("\n+-----------------------------------------------------+");
@@ -291,37 +294,30 @@ int menu() { //menu pilihan data
     printf("\n|[2]Searching(Binary Search,SequentialSearch)         |");
     printf("\n|[3]Keluar                                            |");
     printf("\n+-----------------------------------------------------+");
-    printf("\n|ProgramPilihan :");
-    //	do {
-    //        if (pilihan = validasi()) {
-    //            switch (pilihan) {
-    //                case '1':
-    //                    n = 1000;
-    //                    break;
-    //                case '2':
-    //                    n = 16000;
-    //                    break;
-    //                case '3':
-    //                    n = 64000;
-    //                    break;
-    //            }
-    //            break;
-    //        }
-    //
-    //    } while (1);
-    pilihan = validasi();
-    system("cls");
-    if (cek == pilihan) {
-        if (pilihan > 2 || pilihan < 1) {
-            if (pilihan == 3) {
+	do {
+        printf("\nMasukkan pilihan: ");
+        if (scanf("%d%c", & pilihan, & enterCheck) != 2 || enterCheck != '\n') {
+            printf("\nInput Invalid!\n");
+            fflush(stdin);
+        } else {
+            if (pilihan < 3) {
+                menu3();
+                break;
+            } else if (pilihan == 3) {
                 return 0;
+                break;
             } else {
-                system("cls");
-                printf("Input Salah!\n");
-                menu();
+                printf("\nInput Invalid!\n");
             }
         }
-    }
+    } while (1);
+}
+
+int menu3 (){
+	int pilihan;
+	int n;
+	char pilihan1;
+	char enterCheck;
     printf("\n+-----------------------------------------------------+");
     printf("\n|             PROGRAM SORTING & SEARCHING             |");
     printf("\n+-----------------------------------------------------+");
@@ -332,42 +328,38 @@ int menu() { //menu pilihan data
     printf("\n|[4]kembali                                            |");
     printf("\n|[5]Keluar                                            |");
     printf("\n+-----------------------------------------------------+");
-    printf("\nPilihan : ");
-    pilihan1 = validasi();
-    if (pilihan1) {
-        system("cls");
-        if (pilihan1 > 3 || pilihan1 < 1) {
-            if (pilihan1 == 5) {
-                return 0;
+    
+    do {
+        printf("\nMasukkan pilihan: ");
+        if (scanf("%d%c", & pilihan1, & enterCheck) != 2 || enterCheck != '\n') {
+            printf("\nInput Invalid!\n");
+            fflush(stdin);
+        } else {
+            if (pilihan1 == 1) {
+                n = 1000;
+                break;
+            } else if (pilihan1 == 2) {
+                n = 16000;
+                break;
+            } else if (pilihan1 == 3) {
+                n = 64000;
+                break;
             } else if (pilihan1 == 4) {
                 menu();
+                break;
+            }else if (pilihan1 == 5) {
+                cetakAkhir();
+                break;
             } else {
-                system("cls");
-                printf("Input Salah!!!\n");
-                return menu();
-            }
-        } else if (pilihan1) {
-            switch (pilihan1) {
-                case 1:
-                    n = 1000;
-                    break;
-                case 2:
-                    n = 16000;
-                    break;
-                case 3:
-                    n = 64000;
-                    break;
+                printf("\nInput Invalid!\n");
             }
         }
+    } while (1);
         int arr[n];
         seedArray(arr, n);
         menu2(arr, n, pilihan);
-    } else {
-        system("cls");
-        printf("Input Tidak Benar!!!\n");
-        return menu();
-    }
 }
+
 
 int main() {
     menu();
