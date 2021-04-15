@@ -95,7 +95,7 @@ int Sorting() {
     char enterCheck;
     int n;
 
-
+    system("cls");
     printf("|============[ MENU SORTING ]===========|\n");
     printf("|=======================================|\n");
     printf("|        This Program Created By :  	|\n");
@@ -312,6 +312,7 @@ int Searching() {
     int enterCheck;
     char pilihan;
 
+    system("cls");
     printf("|===========[ MENU SEARCHING ]==========|\n");
     printf("|=======================================|\n");
     printf("|        This Program Created By :  	|\n");
@@ -353,7 +354,6 @@ int Searching() {
     int arr[n];
     int arr2[n];
     seedArray(arr, n);
-    dupArray(arr, arr2, n);
     printArray(arr, n);
     do {
         printf("\nMasukkan Angka Yang Ingin Dicari: ");
@@ -371,7 +371,7 @@ int Searching() {
 
     bubbleSort(arr, n);
     detik1 = sequentialSearch(arr, n, angkaDicari);
-    detik2 = binarySearch(arr2, 0, n - 1, angkaDicari);
+    detik2 = binarySearch(arr, 0, n - 1, angkaDicari);
 
     printf("\n\n=====================================================================================================");
     printf("\n\nperbandingan waktu: \n");
@@ -388,6 +388,7 @@ int main() {
     char pilihan;
     char enterCheck;
 
+    system("cls");
     printf("|===========[ MENU SORTING DAN SEARCHING ]==========|\n");
     printf("|===================================================|\n");
     printf("|              This Program Created By :            |\n");
