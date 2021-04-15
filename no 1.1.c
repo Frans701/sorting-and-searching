@@ -98,6 +98,7 @@ void Sorting() {
     char enterCheck;
     int n;
     
+    
     printf("|============[ MENU SORTING ]===========|\n");
     printf("|=======================================|\n");
     printf("|        This Program Created By :  	|\n");
@@ -136,7 +137,7 @@ void Sorting() {
         }
     } while (1);
 
-    system("cls");
+    
 
     int arr[n];
     int arr2[n];
@@ -185,7 +186,7 @@ void Sorting() {
 
 double sequentialSearch(int arr[], int n, int angkaDicari) {
     clock_t waktu;
-    double waktu_dibutuhkan;
+    double detik;
     int i, counter = 0;
 
     waktu = clock();
@@ -197,7 +198,7 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
         printf("\n");
     }
     waktu = clock() - waktu;
-    waktu_dibutuhkan = (double)(waktu) / CLOCKS_PER_SEC;
+    detik = (double)(waktu) / CLOCKS_PER_SEC;
 
     if (counter == 0) {
     	printf("\n=====================================================================================================\n");
@@ -228,12 +229,12 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
         }
     }
 
-    return waktu_dibutuhkan;
+    return detik;
 }
 
 double binarySearch(int arr[], int low, int high, int angkaDicari) {
     clock_t waktu;
-    double waktu_dibutuhkan;
+    double detik;
     int i, counter = 0;
 
     waktu = clock();
@@ -256,7 +257,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
         }
     }
     waktu = clock() - waktu;
-    waktu_dibutuhkan = (double)(waktu) / CLOCKS_PER_SEC;
+    detik = (double)(waktu) / CLOCKS_PER_SEC;
 
     if (counter == 0) {
         printf("\n\nTidak Ada Angka Yang Sesuai!");
@@ -301,12 +302,13 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
         }
     }
 
-    return waktu_dibutuhkan;
+    return detik;
 }
 
 void Searching() {
     clock_t waktu;
-    double waktu_dibutuhkan[3];
+    double detik1;
+    double detik2;
     int i;
     int n;
     int menu;
@@ -332,7 +334,7 @@ void Searching() {
             fflush(stdin);
         } else {
             if (pilihan == '1') {
-                n = 10;
+                n = 1000;
                 break;
             } else if (pilihan == '2') {
                 n = 16000;
@@ -353,13 +355,15 @@ void Searching() {
     } while (1);
 
     int arr[n];
+    int arr2[n];
     seedArray(arr, n);
+    dupArray(arr, arr2, n);
     printArray(arr, n);
     do {
         printf("\nMasukkan Angka Yang Ingin Dicari: ");
         if (((scanf("%d%c", & angkaDicari, & enterCheck)) != 2 || enterCheck != '\n')) {
             printf("\nInput Invalid!\n");
-            while (getchar() != '\n')
+            fflush(stdin);
             ;
         } else {
             if (angkaDicari < 0) {
@@ -371,14 +375,14 @@ void Searching() {
     } while (1);
 
     bubbleSort(arr, n);
-    waktu_dibutuhkan[0] = sequentialSearch(arr, n, angkaDicari);
-    waktu_dibutuhkan[1] = binarySearch(arr, 0, n - 1, angkaDicari);
+    detik1 = sequentialSearch(arr, n, angkaDicari);
+    detik2 = binarySearch(arr2, 0, n - 1, angkaDicari);
 
     printf("\n\n=====================================================================================================");
     printf("\n\nperbandingan waktu: \n");
-    printf("\nSequential Search Membutuhkan %f Detik Untuk Mencari Data", waktu_dibutuhkan[0]);
-    printf("\nBinary Search Membutuhkan %f Detik Untuk Mencari Data\n", waktu_dibutuhkan[1]);
-    if (waktu_dibutuhkan[0] <= waktu_dibutuhkan[1]) {
+    printf("\nSequential Search Membutuhkan %f Detik Untuk Mencari Data", detik1);
+    printf("\nBinary Search Membutuhkan %f Detik Untuk Mencari Data\n", detik2);
+    if (detik1 <= detik2) {
         printf("Maka Pada Pencarian Kali Ini, Sequential Search Lebih Cepat Dari Binary Search\n");
     } else {
         printf("Maka Pada Pencarian Kali Ini, Binary Search Lebih Cepat Dari Sequential Search\n");
@@ -407,7 +411,6 @@ int main() {
             fflush(stdin);
         } else {
             if (pilihan == '1') {
-            	system("cls");
                 Sorting();
                 break;
             } else if (pilihan == '2') {
@@ -446,9 +449,11 @@ void akhir() {
             fflush(stdin);
         } else {
             if (pilihan == '1') {
+            	
                 main();
                 break;
             } else if (pilihan == '2') {
+            	
                 cetakAkhir();
                 break;
             } else {
