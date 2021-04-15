@@ -4,6 +4,22 @@
 
 #include <time.h>
 
+void seedArray(int arr[], int n) {
+    int i;
+    srand(0);
+    for (i = 0; i < n; i++) {
+        arr[i] = rand();
+    }
+}
+
+void printArray(int arr[], int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        printf("-Angka ke-%d : %d", i, arr[i]);
+        printf("\n");
+    }
+}
+
 void menuUtama() {
     printf("\n\n");
     printf("\t\t\t\t\t==========[ MENU SORTING DAN SEARCHING ]===========\n");
@@ -82,201 +98,104 @@ void Sorting() {
     int size;
     int menu;
     int exit = 1;
+    char pilihan;
+    char enterCheck;
+    int n;
+    // system("cls");
+    printf("\t\t\t\t\t==========[ MENU SORTING ]===========\n");
+    printf("\t\t\t\t\t              1. 1000 Angka             	\n");
+    printf("\t\t\t\t\t              2. 16000 Angka             	\n");
+    printf("\t\t\t\t\t              3. 64000 Angka            	\n");
+    printf("\t\t\t\t\t==========================================\n");
+    printf("\t\t\t\t\t   Masukkan menu : ");
     do {
-        // system("cls");
-        printf("\t\t\t\t\t==========[ MENU SORTING ]===========\n");
-        printf("\t\t\t\t\t              1. 1000 Angka             	\n");
-        printf("\t\t\t\t\t              2. 16000 Angka             	\n");
-        printf("\t\t\t\t\t              3. 64000 Angka            	\n");
-        printf("\t\t\t\t\t==========================================\n");
-        printf("\t\t\t\t\t   Masukkan menu : ");
-        scanf("%d", & menu);
-        switch (menu) {
-            case 1: {
-                int angka[1000], temp[1000];
-
-                // system("cls");
-                size = sizeof(angka) / sizeof(angka[0]);
-                srand((unsigned) time(NULL));
-
-                for (i = 0; i < size; i++) {
-                    angka[i] = rand();
-                    temp[i] = angka[i];
-                }
-
-                //Insertion Sort
-                waktu = clock();
-                insertionSort(temp, size);
-                waktu = clock() - waktu;
-
-                waktu_dibutuhkan[0] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                //Bubble Sort
-                waktu = clock();
-                bubbleSort(temp, size);
-                waktu = clock() - waktu;
-                waktu_dibutuhkan[1] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                //Quick Sort
-                waktu = clock();
-                quickSort(temp, 0, size - 1);
-                waktu = clock() - waktu;
-                waktu_dibutuhkan[2] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan[0]);
-                printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan[1]);
-                printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan[2]);
+        printf("\nMasukkan pilihan: ");
+        if (scanf("%c%c", & pilihan, & enterCheck) != 2 || enterCheck != '\n') {
+            printf("\nInput Invalid!\n");
+            fflush(stdin);
+        } else {
+            if (pilihan == '1') {
+                n = 1000;
                 break;
-            }
-            case 2: {
-                int angka[16000], temp[16000];
-
-                // system("cls");
-                size = sizeof(angka) / sizeof(angka[0]);
-                srand((unsigned) time(NULL));
-
-                for (i = 0; i < size; i++) {
-                    angka[i] = rand();
-                    temp[i] = angka[i];
-                }
-
-                //Insertion Sort
-                waktu = clock();
-                insertionSort(temp, size);
-                waktu = clock() - waktu;
-
-                waktu_dibutuhkan[0] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                //Bubble Sort
-                waktu = clock();
-                bubbleSort(temp, size);
-                waktu = clock() - waktu;
-                waktu_dibutuhkan[1] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                //Quick Sort
-                waktu = clock();
-                quickSort(temp, 0, size - 1);
-                waktu = clock() - waktu;
-                waktu_dibutuhkan[2] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan[0]);
-                printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan[1]);
-                printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan[2]);
-
+            } else if (pilihan == '2') {
+                n = 16000;
                 break;
-            }
-            case 3: {
-                int angka[64000], temp[64000];
-
-                // system("cls");
-                size = sizeof(angka) / sizeof(angka[0]);
-                srand((unsigned) time(NULL));
-
-                for (i = 0; i < size; i++) {
-                    angka[i] = rand();
-                    temp[i] = angka[i];
-                }
-
-                //Insertion Sort
-                waktu = clock();
-                insertionSort(temp, size);
-                waktu = clock() - waktu;
-
-                waktu_dibutuhkan[0] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                //Bubble Sort
-                waktu = clock();
-                bubbleSort(temp, size);
-                waktu = clock() - waktu;
-                waktu_dibutuhkan[1] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                //Quick Sort
-                waktu = clock();
-                quickSort(temp, 0, size - 1);
-                waktu = clock() - waktu;
-                waktu_dibutuhkan[2] = (double)(waktu) / CLOCKS_PER_SEC;
-
-                for (i = 0; i < size; i++) {
-                    if (i == size - 1) {
-                        printf(" dan %d.", temp[i]);
-                    } else {
-                        printf(" %d,", temp[i]);
-                    }
-                    temp[i] = angka[i];
-                }
-                printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan[0]);
-                printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan[1]);
-                printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan[2]);
+            } else if (pilihan == '3') {
+                n = 64000;
                 break;
+            } else {
+                printf("\nInput Invalid!\n");
             }
         }
-        printf("Tekan '1' untuk ke menu, tekan '0' untuk keluar");
-        scanf("%d", & exit);
-    } while (exit == 1);
+    } while (1);
+
+    system("cls");
+//				size = sizeof(angka) / sizeof(angka[0]);
+//				srand((unsigned) time(NULL));
+//				
+//				for(i=0; i<size; i++){
+//					angka[i] = rand();
+//					temp[i] = angka[i];
+//				}
+    int arr[n];
+        int arr2[n];
+    int arr3[n];
+    seedArray(arr, n);
+    printf("Array %d data random sebelum di sort :", n);
+    printArray(arr, n);
+				//Insertion Sort
+				waktu = clock();
+				insertionSort(arr, n);
+				waktu = clock() - waktu;
+				
+				waktu_dibutuhkan[0] = (double)(waktu) / CLOCKS_PER_SEC;
+	
+//				for(i=0; i<size; i++){
+//					if(i == size - 1){
+//						printf(" dan %d.", temp[i]);
+//					}
+//					else{
+//						printf(" %d,", temp[i]);
+//					}
+//					temp[i] = angka[i];
+//				}
+				//Bubble Sort
+				waktu = clock();
+				bubbleSort(arr2, n);
+				waktu = clock() - waktu;
+				waktu_dibutuhkan[1] = (double)(waktu) / CLOCKS_PER_SEC;
+				
+//				for(i=0; i<size; i++){
+//					if(i == size - 1){
+//						printf(" dan %d.", temp[i]);
+//					}
+//					else{
+//						printf(" %d,", temp[i]);
+//					}
+//					temp[i] = angka[i];
+//				}
+				//Quick Sort
+				waktu = clock();
+				quickSort(arr3,0, n-1);
+				waktu = clock() - waktu;
+				waktu_dibutuhkan[2] = (double)(waktu) / CLOCKS_PER_SEC;
+				printArray(arr, n);
+//				for(i=0; i<size; i++){
+//					if(i == size - 1){
+//						printf(" dan %d.", temp[i]);
+//					}
+//					else{
+//						printf(" %d,", temp[i]);
+//					}
+//					temp[i] = angka[i];
+//				}
+				    printf("\n=====================================================================================================");
+    printf("Array %d data random sesudah di sort :", n);
+    printArray(arr, n);
+				printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan[0]);
+				printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan[1]);
+				printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan[2]);
+
 }
 
 //sequentialSearch(int arr[], int n, int angka) 
@@ -398,21 +317,6 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
 
     return waktu_dibutuhkan;
 }
-void seedArray(int arr[], int n) {
-    int i;
-    srand(0);
-    for (i = 0; i < n; i++) {
-        arr[i] = rand();
-    }
-}
-
-void printArray(int arr[], int n) {
-    int i;
-    for (i = 0; i < n; i++) {
-        printf("-Angka ke-%d : %d", i, arr[i]);
-        printf("\n");
-    }
-}
 
 void Searching() {
     clock_t waktu;
@@ -495,7 +399,7 @@ int main() {
             fflush(stdin);
         } else {
             if (pilihan == '1') {
-                Searching();
+                Sorting();
                 break;
             } else if (pilihan == '2') {
                 Searching();
