@@ -4,12 +4,21 @@
 
 #include <time.h>
 
+void cetakAkhir();
+void akhir();
+
 void seedArray(int arr[], int n) {
     int i;
     srand(0);
     for (i = 0; i < n; i++) {
         arr[i] = rand();
     }
+}
+
+void dupArray(int source[], int target[], int n) {
+    int i;
+    for (i = 0; i < n; i++)
+        target[i] = source[i];
 }
 
 void printArray(int arr[], int n) {
@@ -20,85 +29,66 @@ void printArray(int arr[], int n) {
     }
 }
 
-void menuUtama() {
-    printf("\n\n");
-    printf("\t\t\t\t\t==========[ MENU SORTING DAN SEARCHING ]===========\n");
-    printf("\t\t\t\t\t              1. Sorting                	\n");
-    printf("\t\t\t\t\t              2. Searching                 	\n");
-    printf("\t\t\t\t\t              3. Exit                  	\n");
-    printf("\t\t\t\t\t==========================================\n");
-}
-
-void swap(int * i1, int * i2) {
-    int temp = * i1;
-    * i1 = * i2;
-    * i2 = temp;
-}
-
-void bubbleSort(int arr[], int size) {
-    int i, a;
-    for (i = 0; i < size - 1; i++) {
-        int flag = 0;
-        for (a = 0; a < size - i - 1; a++) {
-            if (arr[a] > arr[a + 1]) {
-                swap( & arr[a], & arr[a + 1]);
-                flag = 1;
-            }
-        }
-        if (flag == 0) {
-            break;
+int partition(int arr[], int low, int high) { //menentukan pivot quick
+    int pivot = arr[high];
+    int temp;
+    int i = (low - 1);
+    int j;
+    for (j = low; j <= high - 1; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
-
+    temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return (i + 1);
 }
 
-int Partition(int * A, int start, int end) {
-    int pivot = A[end];
-    int i;
-    int partitionIndex = start;
-    for (i = start; i < end; i++) {
-        if (A[i] <= pivot) {
-            swap( & A[partitionIndex], & A[i]);
-            partitionIndex++;
-        }
-    }
-    swap( & A[partitionIndex], & A[end]);
-    return partitionIndex;
-}
-
-void quickSort(int * A, int start, int end) {
-    if (start < end) {
-        int partitionIndex = Partition(A, start, end);
-        quickSort(A, start, partitionIndex - 1);
-        quickSort(A, partitionIndex + 1, end);
+void quickSort(int arr[], int low, int high) { //mengurutkan angka secara quick
+    int pi = partition(arr, low, high);
+    if (low < high) {
+        pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
     }
 }
 
-void insertionSort(int angka[], int size) {
-    int i, j, patokan;
+void insertionSort(int arr[], int n) {
+    int i, j, key;
 
-    for (i = 1; i < size; i++) {
-        patokan = angka[i];
+    for (i = 1; i < n; i++) {
+        key = arr[i];
 
         j = i - 1;
 
-        while (j >= 0 && angka[j] > patokan) {
-            angka[j + 1] = angka[j];
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
             j--;
         }
 
-        angka[j + 1] = patokan;
+        arr[j + 1] = key;
     }
 }
 
-void dupArray(int source[], int target[], int n) { 
-    int i;
-    for (i = 0; i < n; i++)
-        target[i] = source[i];
+void bubbleSort(int arr[], int n) {
+    int i, j, temp;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 
 void Sorting() {
-	
+
     clock_t waktu;
     double waktu_dibutuhkan;
     double waktu_dibutuhkan2;
@@ -110,13 +100,18 @@ void Sorting() {
     char pilihan;
     char enterCheck;
     int n;
-    
-    printf("\t\t\t\t\t==========[ MENU SORTING ]===========\n");
-    printf("\t\t\t\t\t              1. 1000 Angka             	\n");
-    printf("\t\t\t\t\t              2. 16000 Angka             	\n");
-    printf("\t\t\t\t\t              3. 64000 Angka            	\n");
-    printf("\t\t\t\t\t==========================================\n");
-    printf("\t\t\t\t\t   Masukkan menu : ");
+
+    printf("|============[ MENU SORTING ]===========|\n");
+    printf("|=======================================|\n");
+    printf("|        This Program Created By :  	|\n");
+    printf("|               KELOMPOK 13         	|\n");
+    printf("|=======================================|\n");
+    printf("|1. 1000 data                           |\n");
+    printf("|2. 16000 data                          |\n");
+    printf("|3. 64000 data                          |\n");
+    printf("|4. Kembali                             |\n");
+    printf("|5. Keluar                              |\n");
+    printf("|=======================================|\n");
     do {
         printf("\nMasukkan pilihan: ");
         if (scanf("%c%c", & pilihan, & enterCheck) != 2 || enterCheck != '\n') {
@@ -131,6 +126,12 @@ void Sorting() {
                 break;
             } else if (pilihan == '3') {
                 n = 64000;
+                break;
+            } else if (pilihan == '4') {
+                main();
+                break;
+            } else if (pilihan == '5') {
+                cetakAkhir();
                 break;
             } else {
                 printf("\nInput Invalid!\n");
@@ -173,7 +174,6 @@ void Sorting() {
     printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan);
     printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan2);
     printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan3);
-
 }
 
 double sequentialSearch(int arr[], int n, int angkaDicari) {
@@ -303,15 +303,18 @@ void Searching() {
     int menu;
     int angkaDicari;
     int enterCheck;
-    int exit = 1;
     char pilihan;
-
-    printf("\t\t\t\t\t==========[ MENU SORTING ]===========\n");
-    printf("\t\t\t\t\t              1. 1000 Angka             	\n");
-    printf("\t\t\t\t\t              2. 16000 Angka             	\n");
-    printf("\t\t\t\t\t              3. 64000 Angka            	\n");
-    printf("\t\t\t\t\t==========================================\n");
-    printf("\t\t\t\t\t   Masukkan menu : ");
+    printf("|===========[ MENU SEARCHING ]==========|\n");
+    printf("|=======================================|\n");
+    printf("|        This Program Created By :  	|\n");
+    printf("|               KELOMPOK 13         	|\n");
+    printf("|=======================================|\n");
+    printf("|1. 1000 data                           |\n");
+    printf("|2. 16000 data                          |\n");
+    printf("|3. 64000 data                          |\n");
+    printf("|4. Kembali                             |\n");
+    printf("|5. Keluar                              |\n");
+    printf("|=======================================|\n");
     do {
         printf("\nMasukkan pilihan: ");
         if (scanf("%c%c", & pilihan, & enterCheck) != 2 || enterCheck != '\n') {
@@ -327,6 +330,12 @@ void Searching() {
             } else if (pilihan == '3') {
                 n = 64000;
                 break;
+            } else if (pilihan == '4') {
+                main();
+                break;
+            } else if (pilihan == '5') {
+                cetakAkhir();
+                break;
             } else {
                 printf("\nInput Invalid!\n");
             }
@@ -340,7 +349,8 @@ void Searching() {
         printf("\t\t\tMasukkan Angka Yang Ingin Dicari: ");
         if (((scanf("%d%c", & angkaDicari, & enterCheck)) != 2 || enterCheck != '\n')) {
             printf("Please enter an integer: ");
-            while (getchar() != '\n');
+            while (getchar() != '\n')
+            ;
         } else {
             if (angkaDicari < 0) {
                 printf("Inputan tidak boleh dibawah '0'");
@@ -362,12 +372,22 @@ void Searching() {
     } else {
         printf("Maka Pada Pencarian Kali Ini, Binary Search Lebih Cepat Dari Sequential Search\n\n");
     }
+    akhir();
 }
-int main() {
-    int pilihan;
-    int enterCheck;
 
-    menuUtama();
+int main() {
+    char pilihan;
+    char enterCheck;
+
+    printf("|===========[ MENU SORTING DAN SEARCHING ]==========|\n");
+    printf("|===================================================|\n");
+    printf("|              This Program Created By :            |\n");
+    printf("|                    KELOMPOK 13                    |\n");
+    printf("|===================================================|\n");
+    printf("|1. Sorting                                         |\n");
+    printf("|2. Searching                                       |\n");
+    printf("|3. Keluar                                          |\n");
+    printf("|===================================================|\n");
 
     do {
         printf("\nMasukkan pilihan: ");
@@ -382,12 +402,49 @@ int main() {
                 Searching();
                 break;
             } else if (pilihan == '3') {
-
+                cetakAkhir();
                 break;
             } else {
                 printf("\nInput Invalid!\n");
             }
         }
     } while (1);
+}
 
+void cetakAkhir() {
+    system("cls");
+    printf("-----------------------------------------------\n");
+    printf("* TERIMA KASIH SUDAH MENGGUNAKAN PROGRAM KAMI *\n");
+    printf("|                GOOD BYE >_<                 |\n");
+    printf("*             FROM KELOMPOK 13                *\n");
+    printf("-----------------------------------------------\n");
+}
+
+void akhir() {
+    char pilihan;
+    char enterCheck;
+
+    printf("\n=====================================================================================================\n");
+    printf("\nSilahkan pilih langkah yang ingin anda lakukan selanjutnya\n");
+    printf(" 1. Kembali ke Menu Utama\n");
+    printf(" 2. Keluar\n");
+    do {
+        printf("\nMasukkan pilihan: ");
+        if ((scanf("%c%c", & pilihan, & enterCheck)) != 2 || enterCheck != '\n') {
+            printf("\nInput Invalid!\n");
+            fflush(stdin);
+        } else {
+            if (pilihan == '1') {
+                system("cls");
+                main();
+                break;
+            } else if (pilihan == '2') {
+                system("cls");
+                cetakAkhir();
+                break;
+            } else {
+                printf("\nInput Invalid!\n");
+            }
+        }
+    } while (1);
 }
