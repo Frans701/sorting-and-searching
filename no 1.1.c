@@ -4,9 +4,6 @@
 
 #include <time.h>
 
-void cetakAkhir();
-void akhir();
-
 void seedArray(int arr[], int n) {
     int i;
     srand(0);
@@ -29,7 +26,7 @@ void printArray(int arr[], int n) {
     }
 }
 
-int partition(int arr[], int low, int high) { 
+int partition(int arr[], int low, int high) {
     int pivot = arr[high];
     int temp;
     int i = (low - 1);
@@ -48,7 +45,7 @@ int partition(int arr[], int low, int high) {
     return (i + 1);
 }
 
-void quickSort(int arr[], int low, int high) { 
+void quickSort(int arr[], int low, int high) {
     int pi = partition(arr, low, high);
     if (low < high) {
         pi = partition(arr, low, high);
@@ -87,7 +84,7 @@ void bubbleSort(int arr[], int n) {
     }
 }
 
-void Sorting() {
+int Sorting() {
 
     clock_t waktu;
     double detik1;
@@ -97,8 +94,8 @@ void Sorting() {
     char pilihan;
     char enterCheck;
     int n;
-    
-    
+
+
     printf("|============[ MENU SORTING ]===========|\n");
     printf("|=======================================|\n");
     printf("|        This Program Created By :  	|\n");
@@ -129,7 +126,7 @@ void Sorting() {
                 main();
                 break;
             } else if (pilihan == '5') {
-                cetakAkhir();
+                return 0;
                 break;
             } else {
                 printf("\nInput Invalid!\n");
@@ -137,7 +134,7 @@ void Sorting() {
         }
     } while (1);
 
-    
+
 
     int arr[n];
     int arr2[n];
@@ -174,14 +171,13 @@ void Sorting() {
     printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data\n", detik1);
     printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data\n", detik2);
     printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", detik3);
-    if(detik2 <= detik3 && detik2 <= detik1){
+    if (detik2 <= detik3 && detik2 <= detik1) {
         printf("\nInsertion sort yang paling cepat\n");
-    }else if(detik3 <= detik2 && detik2 <= detik1){
+    } else if (detik3 <= detik2 && detik2 <= detik1) {
         printf("\nBubble sort yang paling cepat\n");
-    }else{
+    } else {
         printf("\nQuick sort yang paling cepat\n");
     }
-    akhir();
 }
 
 double sequentialSearch(int arr[], int n, int angkaDicari) {
@@ -201,7 +197,7 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
     detik = (double)(waktu) / CLOCKS_PER_SEC;
 
     if (counter == 0) {
-    	printf("\n=====================================================================================================\n");
+        printf("\n=====================================================================================================\n");
         printf("\nTidak Ada Angka Yang Sesuai!");
     } else {
         int indexAngkaDicari[counter];
@@ -214,7 +210,7 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
             }
         }
 
-    	printf("\n=====================================================================================================");
+        printf("\n=====================================================================================================");
         printf("\n\nAngka Ditemukan Pada Index:");
         for (i = 0; i < counter; i++) {
             if (i == 0 && i == counter - 1) {
@@ -286,7 +282,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
                 low = mid + 1;
             }
         }
-    	
+
         printf("\n\nAngka Ditemukan Pada Index:");
         bubbleSort(indexAngkaDicari, counter);
         for (i = 0; i < counter; i++) {
@@ -305,7 +301,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
     return detik;
 }
 
-void Searching() {
+int Searching() {
     clock_t waktu;
     double detik1;
     double detik2;
@@ -315,7 +311,7 @@ void Searching() {
     int angkaDicari;
     int enterCheck;
     char pilihan;
-    
+
     printf("|===========[ MENU SEARCHING ]==========|\n");
     printf("|=======================================|\n");
     printf("|        This Program Created By :  	|\n");
@@ -346,7 +342,7 @@ void Searching() {
                 main();
                 break;
             } else if (pilihan == '5') {
-                cetakAkhir();
+                return 0;
                 break;
             } else {
                 printf("\nInput Invalid!\n");
@@ -363,8 +359,7 @@ void Searching() {
         printf("\nMasukkan Angka Yang Ingin Dicari: ");
         if (((scanf("%d%c", & angkaDicari, & enterCheck)) != 2 || enterCheck != '\n')) {
             printf("\nInput Invalid!\n");
-            fflush(stdin);
-            ;
+            fflush(stdin);;
         } else {
             if (angkaDicari < 0) {
                 printf("Inputan tidak boleh dibawah '0'");
@@ -387,7 +382,6 @@ void Searching() {
     } else {
         printf("Maka Pada Pencarian Kali Ini, Binary Search Lebih Cepat Dari Sequential Search\n");
     }
-    akhir();
 }
 
 int main() {
@@ -417,44 +411,7 @@ int main() {
                 Searching();
                 break;
             } else if (pilihan == '3') {
-                cetakAkhir();
-                break;
-            } else {
-                printf("\nInput Invalid!\n");
-            }
-        }
-    } while (1);
-}
-
-void cetakAkhir() {
-    printf("-----------------------------------------------\n");
-    printf("* TERIMA KASIH SUDAH MENGGUNAKAN PROGRAM KAMI *\n");
-    printf("|                GOOD BYE >_<                 |\n");
-    printf("*             FROM KELOMPOK 13                *\n");
-    printf("-----------------------------------------------\n");
-}
-
-void akhir() {
-    char pilihan;
-    char enterCheck;
-    
-    printf("\n=====================================================================================================\n");
-    printf("\nSilahkan pilih langkah yang ingin anda lakukan selanjutnya\n");
-    printf(" 1. Kembali ke Menu Utama\n");
-    printf(" 2. Keluar\n");
-    do {
-        printf("\nMasukkan pilihan: ");
-        if ((scanf("%c%c", & pilihan, & enterCheck)) != 2 || enterCheck != '\n') {
-            printf("\nInput Invalid!\n");
-            fflush(stdin);
-        } else {
-            if (pilihan == '1') {
-            	
-                main();
-                break;
-            } else if (pilihan == '2') {
-            	
-                cetakAkhir();
+                return 0;
                 break;
             } else {
                 printf("\nInput Invalid!\n");
