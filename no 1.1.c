@@ -200,7 +200,8 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
     waktu_dibutuhkan = (double)(waktu) / CLOCKS_PER_SEC;
 
     if (counter == 0) {
-        printf("\n\nTidak Ada Angka Yang Sesuai!");
+    	printf("\n=====================================================================================================\n");
+        printf("\nTidak Ada Angka Yang Sesuai!");
     } else {
         int indexAngkaDicari[counter];
         counter = 0;
@@ -285,7 +286,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
             }
         }
     	
-        printf("\n\nAngka Ditemukan Pada Index: ");
+        printf("\n\nAngka Ditemukan Pada Index:");
         bubbleSort(indexAngkaDicari, counter);
         for (i = 0; i < counter; i++) {
             if (i == 0 && i == counter - 1) {
@@ -331,7 +332,7 @@ void Searching() {
             fflush(stdin);
         } else {
             if (pilihan == '1') {
-                n = 1000;
+                n = 10;
                 break;
             } else if (pilihan == '2') {
                 n = 16000;
@@ -445,11 +446,9 @@ void akhir() {
             fflush(stdin);
         } else {
             if (pilihan == '1') {
-            	system("cls");
                 main();
                 break;
             } else if (pilihan == '2') {
-            	system("cls");
                 cetakAkhir();
                 break;
             } else {
