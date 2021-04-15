@@ -91,9 +91,18 @@ void insertionSort(int angka[], int size) {
     }
 }
 
+void dupArray(int source[], int target[], int n) { 
+    int i;
+    for (i = 0; i < n; i++)
+        target[i] = source[i];
+}
+
 void Sorting() {
+	
     clock_t waktu;
-    double waktu_dibutuhkan[3];
+    double waktu_dibutuhkan;
+    double waktu_dibutuhkan2;
+    double waktu_dibutuhkan3;
     int i;
     int size;
     int menu;
@@ -101,7 +110,7 @@ void Sorting() {
     char pilihan;
     char enterCheck;
     int n;
-    // system("cls");
+    
     printf("\t\t\t\t\t==========[ MENU SORTING ]===========\n");
     printf("\t\t\t\t\t              1. 1000 Angka             	\n");
     printf("\t\t\t\t\t              2. 16000 Angka             	\n");
@@ -130,75 +139,43 @@ void Sorting() {
     } while (1);
 
     system("cls");
-//				size = sizeof(angka) / sizeof(angka[0]);
-//				srand((unsigned) time(NULL));
-//				
-//				for(i=0; i<size; i++){
-//					angka[i] = rand();
-//					temp[i] = angka[i];
-//				}
+
     int arr[n];
-        int arr2[n];
+    int arr2[n];
     int arr3[n];
     seedArray(arr, n);
     printf("Array %d data random sebelum di sort :", n);
     printArray(arr, n);
-				//Insertion Sort
-				waktu = clock();
-				insertionSort(arr, n);
-				waktu = clock() - waktu;
-				
-				waktu_dibutuhkan[0] = (double)(waktu) / CLOCKS_PER_SEC;
-	
-//				for(i=0; i<size; i++){
-//					if(i == size - 1){
-//						printf(" dan %d.", temp[i]);
-//					}
-//					else{
-//						printf(" %d,", temp[i]);
-//					}
-//					temp[i] = angka[i];
-//				}
-				//Bubble Sort
-				waktu = clock();
-				bubbleSort(arr2, n);
-				waktu = clock() - waktu;
-				waktu_dibutuhkan[1] = (double)(waktu) / CLOCKS_PER_SEC;
-				
-//				for(i=0; i<size; i++){
-//					if(i == size - 1){
-//						printf(" dan %d.", temp[i]);
-//					}
-//					else{
-//						printf(" %d,", temp[i]);
-//					}
-//					temp[i] = angka[i];
-//				}
-				//Quick Sort
-				waktu = clock();
-				quickSort(arr3,0, n-1);
-				waktu = clock() - waktu;
-				waktu_dibutuhkan[2] = (double)(waktu) / CLOCKS_PER_SEC;
-				printArray(arr, n);
-//				for(i=0; i<size; i++){
-//					if(i == size - 1){
-//						printf(" dan %d.", temp[i]);
-//					}
-//					else{
-//						printf(" %d,", temp[i]);
-//					}
-//					temp[i] = angka[i];
-//				}
-				    printf("\n=====================================================================================================");
+    dupArray(arr, arr2, n);
+    dupArray(arr, arr3, n);
+
+    //Insertion Sort
+    waktu = clock();
+    insertionSort(arr, n);
+    waktu = clock() - waktu;
+    waktu_dibutuhkan = (double)(waktu) / CLOCKS_PER_SEC;
+
+    //Bubble Sort
+    waktu = clock();
+    bubbleSort(arr2, n);
+    waktu = clock() - waktu;
+    waktu_dibutuhkan2 = (double)(waktu) / CLOCKS_PER_SEC;
+
+    //Quick Sort
+    waktu = clock();
+    quickSort(arr3, 0, n - 1);
+    waktu = clock() - waktu;
+    waktu_dibutuhkan3 = (double)(waktu) / CLOCKS_PER_SEC;
+
+    printf("\n=====================================================================================================");
     printf("Array %d data random sesudah di sort :", n);
     printArray(arr, n);
-				printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan[0]);
-				printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan[1]);
-				printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan[2]);
+    printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data, Sedangkan\n", waktu_dibutuhkan);
+    printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data, dan\n", waktu_dibutuhkan2);
+    printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", waktu_dibutuhkan3);
 
 }
 
-//sequentialSearch(int arr[], int n, int angka) 
 double sequentialSearch(int arr[], int n, int angkaDicari) {
     clock_t waktu;
     double waktu_dibutuhkan;
@@ -244,7 +221,7 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
 
     return waktu_dibutuhkan;
 }
-//binarySearch(int arr[], int low, int high, int angka)
+
 double binarySearch(int arr[], int low, int high, int angkaDicari) {
     clock_t waktu;
     double waktu_dibutuhkan;
