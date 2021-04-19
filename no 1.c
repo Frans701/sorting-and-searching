@@ -4,11 +4,23 @@
 
 #include <time.h>
 
+void akhir();
+void cetakAkhir();
+
 void seedArray(int arr[], int n) {
     int i;
     srand(0);
     for (i = 0; i < n; i++) {
+        arr[i] = rand() % 64000;
         arr[i] = rand();
+    }
+}
+
+void seedArraySearching(int arr[], int n) {
+    int i;
+    srand(0);
+    for (i = 0; i < n; i++) {
+        arr[i] = rand() % 1000;
     }
 }
 
@@ -134,8 +146,6 @@ int Sorting() {
         }
     } while (1);
 
-
-
     int arr[n];
     int arr2[n];
     int arr3[n];
@@ -171,13 +181,15 @@ int Sorting() {
     printf("\n\nInsertion Sort Membutuhkan %f Detik Untuk Mensortir Data\n", detik1);
     printf("Bubble Sort Membutuhkan %f Detik Untuk Mensortir Data\n", detik2);
     printf("Quick Sort Membutuhkan %f Detik Untuk Mensortir Data\n", detik3);
-    if (detik2 <= detik3 && detik2 <= detik1) {
+    if (detik1 <= detik2 && detik1 <= detik3) {
         printf("\nInsertion sort yang paling cepat\n");
-    } else if (detik3 <= detik2 && detik2 <= detik1) {
+    } else if (detik2 <= detik1 && detik1 <= detik3) {
         printf("\nBubble sort yang paling cepat\n");
     } else {
         printf("\nQuick sort yang paling cepat\n");
     }
+
+    akhir();
 }
 
 double sequentialSearch(int arr[], int n, int angkaDicari) {
@@ -198,7 +210,7 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
 
     if (counter == 0) {
         printf("\n=====================================================================================================\n");
-        printf("\nTidak Ada Angka Yang Sesuai!");
+        printf("\nTidak Ada Angka Yang Sesuai, pada sequential search!");
     } else {
         int indexAngkaDicari[counter];
         counter = 0;
@@ -211,7 +223,7 @@ double sequentialSearch(int arr[], int n, int angkaDicari) {
         }
 
         printf("\n=====================================================================================================");
-        printf("\n\nAngka Ditemukan Pada Index:");
+        printf("\n\nAngka Ditemukan Pada Index sequential search: ");
         for (i = 0; i < counter; i++) {
             if (i == 0 && i == counter - 1) {
                 printf(" %d.", indexAngkaDicari[i]);
@@ -256,7 +268,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
     detik = (double)(waktu) / CLOCKS_PER_SEC;
 
     if (counter == 0) {
-        printf("\n\nTidak Ada Angka Yang Sesuai!");
+        printf("\n\nTidak Ada Angka Yang Sesuai pada binary search!");
     } else {
         int indexAngkaDicari[counter];
         counter = 0;
@@ -283,7 +295,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
             }
         }
 
-        printf("\n\nAngka Ditemukan Pada Index:");
+        printf("\n\nAngka Ditemukan Pada Index, binary search: ");
         bubbleSort(indexAngkaDicari, counter);
         for (i = 0; i < counter; i++) {
             if (i == 0 && i == counter - 1) {
@@ -292,7 +304,7 @@ double binarySearch(int arr[], int low, int high, int angkaDicari) {
                 if (i == counter - 1) {
                     printf(" dan %d.", indexAngkaDicari[i]);
                 } else {
-                    printf("%d,", indexAngkaDicari[i]);
+                    printf(" %d,", indexAngkaDicari[i]);
                 }
             }
         }
@@ -309,7 +321,7 @@ int Searching() {
     int n;
     int menu;
     int angkaDicari;
-    int enterCheck;
+    char enterCheck;
     char pilihan;
 
     system("cls");
@@ -353,13 +365,13 @@ int Searching() {
 
     int arr[n];
     int arr2[n];
-    seedArray(arr, n);
+    seedArraySearching(arr, n);
     printArray(arr, n);
     do {
         printf("\nMasukkan Angka Yang Ingin Dicari: ");
         if (((scanf("%d%c", & angkaDicari, & enterCheck)) != 2 || enterCheck != '\n')) {
             printf("\nInput Invalid!\n");
-            fflush(stdin);;
+            fflush(stdin);
         } else {
             if (angkaDicari < 0) {
                 printf("Inputan tidak boleh dibawah '0'");
@@ -382,6 +394,8 @@ int Searching() {
     } else {
         printf("Maka Pada Pencarian Kali Ini, Binary Search Lebih Cepat Dari Sequential Search\n");
     }
+
+    akhir();
 }
 
 int main() {
@@ -413,6 +427,42 @@ int main() {
                 break;
             } else if (pilihan == '3') {
                 return 0;
+                break;
+            } else {
+                printf("\nInput Invalid!\n");
+            }
+        }
+    } while (1);
+}
+
+void cetakAkhir() {
+    system("cls");
+    printf("-----------------------------------------------\n");
+    printf("* TERIMA KASIH SUDAH MENGGUNAKAN PROGRAM KAMI *\n");
+    printf("|                GOOD BYE >_<                 |\n");
+    printf("*             FROM KELOMPOK 13                *\n");
+    printf("-----------------------------------------------\n");
+}
+
+void akhir() {
+    char pilihan;
+    char enterCheck;
+
+    printf("\n=====================================================================================================\n");
+    printf("\nSilahkan pilih langkah yang ingin anda lakukan selanjutnya\n");
+    printf(" 1. Kembali ke Menu Utama\n");
+    printf(" 2. Keluar\n");
+    do {
+        printf("\nMasukkan pilihan: ");
+        if ((scanf("%c%c", & pilihan, & enterCheck)) != 2 || enterCheck != '\n') {
+            printf("\nInput Invalid!\n");
+            fflush(stdin);
+        } else {
+            if (pilihan == '1') {
+                main();
+                break;
+            } else if (pilihan == '2') {
+                cetakAkhir();
                 break;
             } else {
                 printf("\nInput Invalid!\n");
